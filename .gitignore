@@ -22,3 +22,7 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+venv/
+venvScripts*
+26.1.1
+python
