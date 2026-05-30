@@ -18,10 +18,10 @@ class DatoMeteorologico extends Model
 
     //Convierte automaticamente los tipos de datos al recuperarlos de la BD
     protected $casts = [
-        'fecha_hora'=> 'datetime',
-        'temperatura'=> 'float',
-        'humedad'=> 'float',
-        'velocidad_viento'=> 'float',
-        'direccion_viento'=> 'float',
+        'fecha_hora' => 'datetime',
+        'temperatura' => 'float',
+        'humedad' => 'float',
+        'velocidad_viento' => 'float',
+        'direccion_viento' => 'float',
     ];
 }

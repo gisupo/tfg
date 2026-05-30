@@ -11,7 +11,6 @@ Route::prefix('meteorologia')->group(function () {
     Route::get('/datos/{datoMeteorologico}', [DatoMeteorologicoController::class, 'show']);
 
     Route::get('/estadisticas', [DatoMeteorologicoController::class, 'estadisticas']);
-    
-    Route::post('/etl', [DatoMeteorologicoController::class, 'ejecutarETL']);
 
+    Route::post('/etl', [DatoMeteorologicoController::class, 'ejecutarETL']);
 });

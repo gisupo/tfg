@@ -1,7 +1,7 @@
-/* Importamos la fuente Inter de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/*Importamos la fuente Inter de Google Fonts*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
-/* Configuración general */
+/*Configuración general*/
 * {
     margin: 0;
     padding: 0;
@@ -9,83 +9,80 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: #f5f7fa;
     color: #2c3e50;
     min-height: 100vh;
 }
 
-/* Barra de navegación */
+/*Barra de navegación*/
 .navbar {
     background: linear-gradient(135deg, #1a3a5c, #2d7dd2) !important;
-    padding: 15px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    padding: 14px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .navbar-brand {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: white !important;
-    letter-spacing: 0.5px;
 }
 
 .navbar .text-muted {
-    color: #a8d4f5 !important;
-    font-size: 0.85rem;
+    color: #b7d6f3 !important;
+    font-size: 0.8rem;
 }
 
-/* Títulos de sección */
+/*Títulos de sección*/
 h6.text-uppercase {
     color: #1a3a5c !important;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     letter-spacing: 1.5px;
     border-left: 3px solid #2d7dd2;
-    padding-left: 10px;
+    padding-left: 8px;
 }
 
-/* Tarjetas */
+/*Tarjetas*/
 .card {
     background-color: white;
     border: none;
-    border-radius: 10px;
-    box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     color: #2c3e50;
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+    transition: 0.3s;
 }
 
 .card-header {
-    background-color: #f8fafc;
-    border-bottom: 1px solid #e8f0fe;
+    background-color: #f6f8fb;
+    border-bottom: 1px solid #e6edf5;
     color: #1a3a5c;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 10px 10px 0 0 !important;
+    border-radius: 6px 6px 0 0 !important;
 }
 
-/* Iconos y valores de las tarjetas */
+/*Iconos y valores de las tarjetas*/
 .iconoClima {
-    font-size: 2.2rem;
-    margin-bottom: 8px;
+    font-size: 2rem;
+    margin-bottom: 6px;
 }
 
 .valorActual {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #2d7dd2;
 }
 
-/* Estadísticas */
+/*Estadísticas*/
 .etiqueta-estadistica {
-    color: #7f8c8d;
-    font-size: 0.9rem;
+    color: #6c757d;
+    font-size: 0.85rem;
 }
 
 .valor-estadistica {
@@ -93,52 +90,51 @@ h6.text-uppercase {
     color: #1a3a5c;
 }
 
-/* Tabla */
+/*Tabla*/
 .table {
     color: #2c3e50;
 }
 
 .table thead th {
     color: #1a3a5c;
-    border-color: #e8f0fe;
+    border-color: #e6edf5;
     font-weight: 600;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    background-color: #f8fafc;
+    font-size: 0.75rem;
+    background-color: #f6f8fb;
 }
 
 .table tbody td {
-    border-color: #f5f7fa;
-    font-size: 0.9rem;
+    border-color: #f1f3f5;
+    font-size: 0.85rem;
 }
 
 .table tbody tr:hover {
     background-color: #f0f7ff;
 }
 
-/* Botón actualizar */
+/*Botón*/
 .btn-primary {
     background-color: #2d7dd2;
     border-color: #2d7dd2;
     font-weight: 500;
-    border-radius: 6px;
+    border-radius: 5px;
 }
 
 .btn-primary:hover {
     background-color: #1a3a5c;
     border-color: #1a3a5c;
 }
-/* Alerta de éxito */
+
+/*Alerta*/
 .alert-success {
-    background-color: #eafaf1;
-    border-color: #a9dfbf;
-    color: #1e8449;
-    border-radius: 8px;
+    background-color: #e9f7ef;
+    border-color: #b7e4c7;
+    color: #1e7a3a;
+    border-radius: 6px
 }
 
-/* Texto secundario */
+/*Texto secundario*/
 .text-muted {
-    color: #7f8c8d !important;
+    color: #6c757d !important;
     font-size: 0.8rem;
 }
