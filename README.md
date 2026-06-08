@@ -5,7 +5,7 @@ I.E.S. Maria Enríquez - Gandia - Curso 2025/2026
 
 ## Descripción
 
-Aplicación web que obtiene datos meteorológicos en tiempo real de la localidad de Gandia mediante la API Open-Meteo, los procesa y almacena en una base de datos MySQL, y los visualiza mediante una interfaz web con gráficas interactivas.
+Aplicación web que obtiene datos meteorológicos en tiempo real de varias ciudades españolas mediante la API Open-Meteo, los procesa y almacena en una base de datos MySQL, y los visualiza mediante una interfaz web con gráficas interactivas.
 
 ## Tecnologías utilizadas
 
@@ -29,9 +29,9 @@ Aplicación web que obtiene datos meteorológicos en tiempo real de la localidad
 1. Clonar el repositorio
 2. Copiar `.env.example` a `.env` y configurar las variables
 3. Ejecutar `./vendor/bin/sail up -d`
-4. Ejecutar `./vendor/bin/sail artisan migrate`
+4. Ejecutar `./vendor/bin/sail artisan migrate --seed`
 5. Ejecutar `./vendor/bin/sail artisan etl:ejecutar`
-6. Abrir `http://localhost/meteorologia.html`
+6. Abrir `http://localhost/meteorologia`
 
 ## Autor
 
