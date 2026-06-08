@@ -30,12 +30,12 @@ class EjecutarETL extends Command
 
             //1. EXTRACCIÓN (Extract)
             //Hacemos la petición HTTP a la API Open-Meteo
-            $respuesta  = Http::get('https://api.open-meteo.com/v1/forecast', [
-                'latitude'          =>  $ciudad->latitud,
-                'longitude'         =>  $ciudad->longitud,
-                'current_weather'   =>  true,
-                'hourly'            =>  'relative_humidity_2m',
-                'timezone'          =>  'Europe/Madrid',
+            $respuesta = Http::get('https://api.open-meteo.com/v1/forecast', [
+                'latitude' => $ciudad->latitud,
+                'longitude' => $ciudad->longitud,
+                'current_weather' => true,
+                'hourly' => 'relative_humidity_2m',
+                'timezone' => 'Europe/Madrid',
             ]);
 
             //Usamos continue para saltar a la siguiente ciudad si la API falla.
@@ -54,10 +54,10 @@ class EjecutarETL extends Command
             $humedadHora = $datos['hourly']['relative_humidity_2m'][0];
 
             //Limpiamos los datos pasándolos a decimales y redondeando
-            $temperatura        = round((float) $tiempoActual['temperature'], 2);
-            $velocidadViento    = round((float) $tiempoActual['windspeed'], 2);
-            $direccionViento    = round((float) $tiempoActual['winddirection'], 2);
-            $humedad            = round((float) $humedadHora, 2);
+            $temperatura = round((float) $tiempoActual['temperature'], 2);
+            $velocidadViento = round((float) $tiempoActual['windspeed'], 2);
+            $direccionViento = round((float) $tiempoActual['winddirection'], 2);
+            $humedad = round((float) $humedadHora, 2);
 
             //Validaciones para asegurar que no entren datos poco reales
             if ($temperatura < -50 || $temperatura > 60) {
@@ -72,12 +72,12 @@ class EjecutarETL extends Command
             //3. CARGA (Load)
             //Guardamos los datos limpios en la BD usando el Modelo de Eloquent
             DatoMeteorologico::create([
-                'ciudad_id'         => $ciudad->id,
-                'fecha_hora'        => Carbon::now('Europe/Madrid'),
-                'temperatura'       => $temperatura,
-                'humedad'           => $humedad,
-                'velocidad_viento'  => $velocidadViento,
-                'direccion_viento'  => $direccionViento,
+                'ciudad_id' => $ciudad->id,
+                'fecha_hora' => Carbon::now('Europe/Madrid'),
+                'temperatura' => $temperatura,
+                'humedad' => $humedad,
+                'velocidad_viento' => $velocidadViento,
+                'direccion_viento' => $direccionViento,
             ]);
 
             //Mensaje de éxito

@@ -92,7 +92,7 @@ class DatoMeteorologicoController extends Controller
     //Devuelve la lista de ciudades para rellenar el selector del frontend.
     public function ciudades()
     {
-        $ciudades = Ciudad::orderBy('nombre')->get(['id', 'nombre', 'provincia']);
+        $ciudades = Ciudad::orderBy('nombre', 'asc')->get(['id', 'nombre', 'provincia']);
         return response()->json($ciudades, 200);
     }
 
