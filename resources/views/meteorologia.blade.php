@@ -18,7 +18,7 @@
         <div class="d-flex gap-2 align-items-center">
             <select id="selectorCiudad" class="form-select form-select-sm" onchange="cambiarCiudad()">
                 <option value="" selected disabled>Cambia de ciudad</option>
-                    @foreach($ciudades as $ciudad)
+                    @foreach($ciudades->sortBy('nombre') as $ciudad)
                 <option value="{{ $ciudad->id }}">{{ $ciudad->nombre }} ({{ $ciudad->provincia }})</option>
                 @endforeach
             </select>
