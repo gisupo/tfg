@@ -5,7 +5,7 @@ I.E.S. Maria Enríquez - Gandia - Curso 2025/2026
 
 ## Descripción
 
-Aplicación web que obtiene datos meteorológicos en tiempo real de varias ciudades españolas mediante la API Open-Meteo, los procesa y almacena en una base de datos MySQL, y los visualiza mediante una interfaz web con gráficas interactivas.
+Aplicación web orientada a la obtención de datos desde fuentes externas, su procesamiento y almacenamiento en una base de datos. El sistema obtiene datos meteorológicos en tiempo real de varias ciudades españolas mediante la API Open-Meteo, los procesa y almacena en una base de datos MySQL, permitiendo gestionar y consultar la información recopilada mediante una interfaz web con gráficas interactivas.
 
 ## Tecnologías utilizadas
 
