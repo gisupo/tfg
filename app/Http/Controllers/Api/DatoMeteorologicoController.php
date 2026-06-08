@@ -3,63 +3,78 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\DatoMeteorologico;
+use App\Models\Ciudad;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 
 class DatoMeteorologicoController extends Controller
 {
-    /**
-     * Endpoint: Obtener todos los registros climatológicos.
-     * Sirve para listar el historial completo en el Front-end.
-     */
-    public function index()
+    //Devuelve todos los registros con el nombre de la ciudad.
+    public function index(Request $request)
     {
-        //1. Consultamos todos los registros de la tabla mediante Eloquent ORM
-        $datosMeteorologicos = DatoMeteorologico::orderBy('fecha_hora', 'desc')->get();
+        $datosMeteorologicos = DatoMeteorologico::with('ciudad')
+            ->orderBy('fecha_hora', 'desc')->get();
 
-        //2. Iteramos y transformamos la colecció (array) para controlar los campos que enviamos a la API
         $datosMeteorologicos = $datosMeteorologicos->map(function ($dato) {
             return [
-                'id'                => $dato->id,
-                'fecha_hora'        => $dato->fecha_hora,
-                'temperatura'       => $dato->temperatura,
-                'humedad'           => $dato->humedad,
-                'velocidad_viento'  => $dato->velocidad_viento,
-                'direccion_viento'  => $dato->direccion_viento,
+                'id'               => $dato->id,
+                'ciudad_id'        => $dato->ciudad_id,
+                'ciudad'           => $dato->ciudad ? $dato->ciudad->nombre : 'Sin ciudad',
+                'fecha_hora'       => $dato->fecha_hora,
+                'temperatura'      => $dato->temperatura,
+                'humedad'          => $dato->humedad,
+                'velocidad_viento' => $dato->velocidad_viento,
+                'direccion_viento' => $dato->direccion_viento,
             ];
         });
-        //3. Devolvemos la respuesta estructurada en formato JSON con código de estado HTTP 200 (OK)
         return response()->json($datosMeteorologicos, 200);
     }
 
-    /**
-     * Endpoint: Obtener un único registro por su ID.
-     * Activamos el Route Model Binding laravel por detras trababaja laravel(poniendo el nombre del modelo "DatoMeteorologico" es una inyección de dependencias).
-     */
+    //Devuelve un único registro por su ID.
     public function show(DatoMeteorologico $datoMeteorologico)
     {
-        //Retornamos directamente el registro seleccionado en formato JSON
-        //Si el ID no existe, Laravel responde con un error 404 (Not Found)
         return response()->json([
-            'id'                => $datoMeteorologico->id,
-            'fecha_hora'        => $datoMeteorologico->fecha_hora,
-            'temperatura'       => $datoMeteorologico->temperatura,
-            'humedad'           => $datoMeteorologico->humedad,
-            'velocidad_viento'  => $datoMeteorologico->velocidad_viento,
-            'direccion_viento'  => $datoMeteorologico->direccion_viento,
+            'id'               => $datoMeteorologico->id,
+            'ciudad_id'        => $datoMeteorologico->ciudad_id,
+            'ciudad'           => $datoMeteorologico->ciudad ? $datoMeteorologico->ciudad->nombre : 'Sin ciudad',
+            'fecha_hora'       => $datoMeteorologico->fecha_hora,
+            'temperatura'      => $datoMeteorologico->temperatura,
+            'humedad'          => $datoMeteorologico->humedad,
+            'velocidad_viento' => $datoMeteorologico->velocidad_viento,
+            'direccion_viento' => $datoMeteorologico->direccion_viento,
         ], 200);
     }
 
+    //Devuelve los últimos 50 registros de una ciudad
+    public function porCiudad(Ciudad $ciudad)
+    {
+        $datos = DatoMeteorologico::where('ciudad_id', $ciudad->id)
+            ->orderBy('fecha_hora', 'desc')->limit(50)->get();
+
+        $datos = $datos->map(function ($dato) use ($ciudad) {
+            return [
+                'id'               => $dato->id,
+                'ciudad_id'        => $dato->ciudad_id,
+                'ciudad'           => $ciudad->nombre,
+                'fecha_hora'       => $dato->fecha_hora,
+                'temperatura'      => $dato->temperatura,
+                'humedad'          => $dato->humedad,
+                'velocidad_viento' => $dato->velocidad_viento,
+                'direccion_viento' => $dato->direccion_viento,
+            ];
+        });
+        return response()->json($datos, 200);
+    }
+
     /**
-     * Endpoint: Obtener cálculos estadísticos globales.
-     * Procesa los datos en el servidor en lugar de hacer el cálculo en el Front-end.
+     * Devuelve estadísticas globales de todos los registros.
+     * Usamos los métodos de Colecciones de Laravel (max, min, avg, count).
      */
     public function estadisticas()
     {
-        //1. Recuperamos toda la información meteorológica disponible
         $datos = DatoMeteorologico::all();
 
-        //2. Usamos los métodos de las Colecciones (array con funciones matemátematicas) (max, min, avg, count) con esto evitamos consultas pesadas a la BD y bucles
         return response()->json([
             'temp_max'        => $datos->max('temperatura'),
             'temp_min'        => $datos->min('temperatura'),
@@ -74,6 +89,14 @@ class DatoMeteorologicoController extends Controller
         ], 200);
     }
 
+    //Devuelve la lista de ciudades para rellenar el selector del frontend.
+    public function ciudades()
+    {
+        $ciudades = Ciudad::orderBy('nombre')->get(['id', 'nombre', 'provincia']);
+        return response()->json($ciudades, 200);
+    }
+
+    //Ejecuta la ETL desde el botón del frontend.
     public function ejecutarETL()
     {
         try {

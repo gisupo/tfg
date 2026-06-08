@@ -26,3 +26,4 @@ venv/
 venvScripts*
 26.1.1
 python
+$'\r'
