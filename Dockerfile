@@ -1,4 +1,4 @@
-FROM php:8.3
+FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y \
     unzip zip git curl libzip-dev \
@@ -6,13 +6,17 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /app
+WORKDIR /var/www/html
 
 COPY . .
 
 RUN COMPOSER_MEMORY_LIMIT=-1 composer install \
     --no-dev --prefer-dist --no-interaction --optimize-autoloader
 
-EXPOSE 10000
+RUN a2enmod rewrite
 
-CMD php artisan serve --host=0.0.0.0 --port=10000
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+
+CMD apache2-foreground
