@@ -1,7 +1,7 @@
 FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y \
-    unzip zip git curl libzip-dev \
+    git zip unzip curl libzip-dev \
     && docker-php-ext-install pdo pdo_mysql zip
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -16,7 +16,5 @@ RUN COMPOSER_MEMORY_LIMIT=-1 composer install \
 RUN a2enmod rewrite
 
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
-
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
 CMD apache2-foreground
