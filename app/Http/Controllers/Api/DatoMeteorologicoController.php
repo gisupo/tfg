@@ -67,10 +67,8 @@ class DatoMeteorologicoController extends Controller
         return response()->json($datos, 200);
     }
 
-    /**
-     * Devuelve estadísticas globales de todos los registros.
-     * Usamos los métodos de Colecciones de Laravel (max, min, avg, count).
-     */
+    // Devuelve estadísticas globales de todos los registros. 
+    //Usamos los métodos de Colecciones de Laravel (max, min, avg, count).
     public function estadisticas()
     {
         $datos = DatoMeteorologico::all();

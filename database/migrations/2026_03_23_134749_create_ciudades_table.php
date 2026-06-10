@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('provincia');
             $table->string('pais')->default('España');
-            $table->float('latitud', 10, 7);
-            $table->float('longitud', 10, 7);
+            $table->decimal('latitud', 10, 7);
+            $table->decimal('longitud', 10, 7);
             $table->timestamps();
         });
     }

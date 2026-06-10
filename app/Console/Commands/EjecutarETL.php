@@ -60,6 +60,8 @@ class EjecutarETL extends Command
             $humedad = round((float) $humedadHora, 2);
 
             //Validaciones para asegurar que no entren datos poco reales
+
+            
             if ($temperatura < -50 || $temperatura > 60) {
                 $this->error("Validación fallida para $ciudad->nombre: Temperatura no válida ($temperatura °C)");
                 continue;
