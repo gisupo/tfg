@@ -1,9 +1,23 @@
 FROM php:8.3-apache
-RUN apt-get update && apt-get install -y libzip-dev zip git && docker-php-ext-install pdo pdo_mysql zip
+
+RUN apt-get update && apt-get install -y \
+    libzip-dev zip git unzip \
+    && docker-php-ext-install pdo pdo_mysql zip
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 WORKDIR /var/www/html
+
 COPY . .
-RUN composer install --no-dev --optimize-autoloader
+
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install \
+    --no-dev \
+    --prefer-dist \
+    --no-interaction \
+    --optimize-autoloader
+
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+
 RUN a2enmod rewrite
-CMD php artisan migrate --force && php artisan db:seed --force && apache2-foreground
+
+CMD apache2-foreground
