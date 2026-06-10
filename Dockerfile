@@ -1,6 +1,6 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.3-cli-alpine
 RUN docker-php-ext-install pdo pdo_mysql
-RUN curl -sS https://getcomposer.org | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 RUN composer install --no-dev --optimize-autoloader
