@@ -1,8 +1,9 @@
-FROM php:8.3-cli-alpine
-RUN apk add --no-cache git unzip libzip-dev
-RUN docker-php-ext-install pdo pdo_mysql zip
+FROM php:8.3-apache
+RUN docker-php-ext-install pdo pdo_mysql
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 RUN composer install --no-dev --optimize-autoloader
-CMD php artisan migrate --force && php artisan db:seed --force && php -S 0.0.0.0:80 -t public
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
+CMD php artisan migrate --force && php artisan db:seed --force && apache2-foreground
