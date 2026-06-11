@@ -1,6 +1,8 @@
 <?php
 use App\Models\Ciudad;
 use Illuminate\Support\Facades\Route;
+
 Route::get('/meteorologia', function () {
-    return "OK VIEW FUNCIONA";
+    $ciudades = Ciudad::all();
+    return view('meteorologia', compact('ciudades'));
 });
