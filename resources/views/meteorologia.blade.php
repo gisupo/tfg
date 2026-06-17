@@ -133,7 +133,7 @@
 
         <div class="row row-cols-1 row-cols-md-3 g-3 mb-4">
             <div class="col">
-                <div class="card p-3 w-100 h-100">id="tituloGraficas" 
+                <div class="card p-3 w-100 h-100"> 
                     <div class="card-header mb-3"><i class="fas fa-temperature-half me-2 text-danger"></i>Temperatura
                     </div>
                     <canvas id="graficaTemperatura"></canvas>
