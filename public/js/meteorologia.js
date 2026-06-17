@@ -117,6 +117,9 @@ function cargarDatosDelClima() {
                         <td>${registro.direccion_viento}°</td>
                     </tr>`;
             });
+
+	filtrarTabla();
+
         })
         .catch((error) => console.error("Error al cargar el historial:", error));
 
