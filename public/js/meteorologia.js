@@ -185,20 +185,37 @@ function descargarCSV() {
 }
 
 //Funcion para  filtrar por rago de fechas
-
 function filtrarTabla() {
     const inicio = document.getElementById('fechaInicio').value;
     const fin = document.getElementById('fechaFin').value;
     const filas = document.querySelectorAll('#tabla-body tr');
+
     filas.forEach(fila => {
-        const fecha = new Date(fila.querySelectorAll('td')[2].textContent);
-        const dentroRango = (!inicio || fecha >= new Date(inicio)) && (!fin || fecha <= new Date(fin + 'T23:59:59'));
+        const texto = fila.querySelectorAll('td')[2].textContent;
+
+
+        //coger solo la parte de la fecha antes de la coma 
+
+        const fechaTexto = texto.split(',')[0]; 
+
+        const partes = fechaTexto.split('/');
+
+        const fecha = new Date(partes[2], partes[1] - 1, partes[0]); 
+
+        //año, mes, dia 
+
+        let dentroRango = true;
+
+        if (inicio) {
+            const fechaInicio = new Date(inicio);
+            dentroRango = dentroRango && fecha >= fechaInicio;
+        }
+        if (fin) {
+            const fechaFin = new Date(fin);
+
+            dentroRango = dentroRango && fecha <= fechaFin;
+        }
         fila.style.display = dentroRango ? '' : 'none';
     });
-}
 
-function limpiarFiltros() {
-    document.getElementById('fechaInicio').value = '';
-    document.getElementById('fechaFin').value = '';
-    document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
 }
