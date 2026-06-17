@@ -122,9 +122,6 @@ function cargarDatosDelClima() {
                     </tr>`;
             });
 
-	pintarPaginacion();
-    filtrarTabla();
-
         })
         .catch((error) => console.error("Error al cargar el historial:", error));
 
@@ -221,3 +218,16 @@ function limpiarFiltros() {
     document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
 }
 
+function pintarPaginacion() {
+    let html = '<nav><ul class="pagination pagination-sm mb-0">';
+    html += `<li class="page-item ${paginaActual === 1 ? 'disabled' : ''}">
+        <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual - 1})">«</a></li>`;
+    for (let i = 1; i <= totalPaginas; i++) {
+        html += `<li class="page-item ${i === paginaActual ? 'active' : ''}">
+            <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${i})">${i}</a></li>`;
+    }
+    html += `<li class="page-item ${paginaActual === totalPaginas ? 'disabled' : ''}">
+        <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual + 1})">»</a></li>`;
+    html += '</ul></nav>';
+    document.getElementById('paginacion').innerHTML = html;
+}
