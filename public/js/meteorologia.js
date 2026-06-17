@@ -205,3 +205,9 @@ function filtrarTabla() {
         fila.style.display = mostrar ? '' : 'none';
     });
 }
+
+function limpiarFiltros() {
+    document.getElementById('fechaInicio').value = '';
+    document.getElementById('fechaFin').value = '';
+    document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
+}

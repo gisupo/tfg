@@ -154,19 +154,22 @@
 
         </div>
 
-<!--Título + botón descarga + filtros-->
-<div class="d-flex justify-content-between align-items-center mb-2">
-    <h6 class="text-uppercase text-secondary mb-0"><i class="fas fa-table me-2"></i>Histórico de dato</h6>
-    <div class="d-flex align-items-center gap-2">
-        <input type="date" id="fechaInicio" class="form-control form-control-sm" onchange="filtrarTabla()" placeholder="Desde">
-        <input type="date" id="fechaFin" class="form-control form-control-sm" onchange="filtrarTabla()" placeholder="Hasta">
-        <button class="btn btn-outline-secondary btn-sm" onclick="limpiarFiltros()">✕</button>
+<div class="mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6 class="text-uppercase text-secondary mb-0">
+            <i class="fas fa-table me-2"></i>Histórico de datos
+        </h6>
         <button class="btn btn-primary btn-sm" onclick="descargarCSV()">
-            <i class="fas fa-download me-1"></i>Descargar
+            <i class="fas fa-download me-1"></i>Descargar datos
         </button>
     </div>
+    <div class="d-flex gap-2 align-items-center">
+        <input type="date" id="fechaInicio" class="form-control form-control-sm w-auto" onchange="filtrarTabla()">
+        <span class="text-secondary">—</span>
+        <input type="date" id="fechaFin" class="form-control form-control-sm w-auto" onchange="filtrarTabla()">
+        <button class="btn btn-outline-secondary btn-sm" onclick="limpiarFiltros()">Limpiar</button>
+    </div>
 </div>
-
 
 <!--Tabla-->
         <div class="card p-3 mb-4">
