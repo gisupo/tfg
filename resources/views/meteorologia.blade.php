@@ -155,6 +155,10 @@
         </div>
 
 
+	<button class="btn btn-primary btn-sm mt-2" onclick="descargarCSV()">
+    		<i class="fas fa-download me-1"></i> Descargar datos
+	</button>
+
         <h6 class="text-uppercase text-secondary mb-3"><i class="fas fa-table me-2"></i>Últimos registros</h6>
         <div class="card p-3 mb-4">
             <div class="table-responsive">
@@ -173,9 +177,6 @@
                     <tbody id="tabla-body"></tbody>
                 </table>
 
-	<button class="btn btn-primary btn-sm mt-2" onclick="descargarCSV()">
-    		<i class="fas fa-download me-1"></i> Descargar datos
-	</button>
 
             </div>
             <p class="text-muted small text-center mt-2">
