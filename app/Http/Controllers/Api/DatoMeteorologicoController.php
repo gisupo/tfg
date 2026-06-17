@@ -53,7 +53,16 @@ class DatoMeteorologicoController extends Controller
 
         $datos = DatoMeteorologico::where('ciudad_id', $ciudad->id)
 		->where('fecha_hora', '>=', now()->subDays(7))
-            	->orderBy('fecha_hora', 'desc')->paginate($porPagina);
+            	->orderBy('fecha_hora', 'desc');
+
+	if ($request->has('fecha_inicio')) {
+        	$query->where('fecha_hora', '>=', $request->get('fecha_inicio') . ' 00:00:00');
+    	}
+    	if ($request->has('fecha_fin')) {
+        $query->where('fecha_hora', '<=', $request->get('fecha_fin') . ' 23:59:59');
+    	}
+
+	$datos = $query->paginate($porPagina);
 
         $datos->getCollection()->transform(function ($dato) use ($ciudad) {
             return [
