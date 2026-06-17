@@ -131,8 +131,6 @@ function cargarDatosDelClima() {
 
 	    totalPaginas = respuesta.last_page;
             pintarPaginacion();
-            filtrarTabla();
-
         })
         .catch((error) => console.error("Error al cargar el historial:", error));
 
