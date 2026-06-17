@@ -187,6 +187,7 @@ function descargarCSV() {
     a.click();
 }
 
+
 function filtrarTabla() {
     const inicio = document.getElementById('fechaInicio').value;
     const fin = document.getElementById('fechaFin').value;
@@ -197,20 +198,10 @@ function filtrarTabla() {
         const dia = parseInt(partes[0]);
         const mes = parseInt(partes[1]) - 1;
         const anyo = parseInt(partes[2]);
-        const fecha = new Date(anyo, mes, dia);
+        const fechaFila = `${anyo}-${String(mes+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
         let mostrar = true;
-        if (inicio) mostrar = mostrar && fecha >= new Date(inicio);
-        if (fin) {
-            const fechaFin = new Date(fin);
-            fechaFin.setHours(23, 59, 59);
-            mostrar = mostrar && fecha <= fechaFin;
-        }
+        if (inicio) mostrar = mostrar && fechaFila >= inicio;
+        if (fin) mostrar = mostrar && fechaFila <= fin;
         fila.style.display = mostrar ? '' : 'none';
     });
-}
-
-function limpiarFiltros() {
-    document.getElementById('fechaInicio').value = '';
-    document.getElementById('fechaFin').value = '';
-    document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
 }

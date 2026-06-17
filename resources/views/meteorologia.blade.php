@@ -158,15 +158,17 @@
     <h6 class="text-uppercase text-secondary mb-2">
         <i class="fas fa-table me-2"></i>Histórico de datos
     </h6>
-    <div class="d-flex gap-2 align-items-center flex-wrap">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex gap-2 align-items-center">
         <input type="date" id="fechaInicio" class="form-control form-control-sm w-auto" onchange="filtrarTabla()">
         <span class="text-secondary">—</span>
         <input type="date" id="fechaFin" class="form-control form-control-sm w-auto" onchange="filtrarTabla()">
         <button class="btn btn-outline-secondary btn-sm" onclick="limpiarFiltros()">Limpiar</button>
-        <button class="btn btn-primary btn-sm" onclick="descargarCSV()">
-            <i class="fas fa-download me-1"></i>Descargar datos
-        </button>
     </div>
+    <button class="btn btn-primary btn-sm" onclick="descargarCSV()">
+        <i class="fas fa-download me-1"></i>Descargar datos
+    </button>
+</div>
 </div>
 
 <!--Tabla-->
