@@ -123,6 +123,10 @@ function cargarDatosDelClima() {
                     </tr>`;
             });
 
+	    totalPaginas = respuesta.last_page;
+            pintarPaginacion();
+            filtrarTabla();
+
         })
         .catch((error) => console.error("Error al cargar el historial:", error));
 
@@ -190,10 +194,6 @@ function descargarCSV() {
     a.click();
 }
 
-function cambiarPagina(pagina) {
-    paginaActual = pagina;
-    cargarDatosDelClima();
-}
 
 function filtrarTabla() {
     const inicio = document.getElementById('fechaInicio').value;
@@ -217,6 +217,11 @@ function limpiarFiltros() {
     document.getElementById('fechaInicio').value = '';
     document.getElementById('fechaFin').value = '';
     document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
+}
+
+function cambiarPagina(pagina) {
+    paginaActual = pagina;
+    cargarDatosDelClima();
 }
 
 function pintarPaginacion() {
