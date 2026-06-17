@@ -155,16 +155,14 @@
         </div>
 
 
-<!-- TÍTULO + BOTÓN DESCARGA -->
+<!--Título + Botón descarga -->
 <div class="d-flex justify-content-between align-items-center mb-3">
 
-    <h6 class="text-uppercase text-secondary mb-0">
-        <i class="fas fa-table me-2"></i>Histórico de datos
-    </h6>
+    <h6 class="text-uppercase text-secondary mb-0"><i class="fas fa-table me-2"></i>Histórico de datos</h6>
 
     <button class="btn btn-primary btn-sm" onclick="descargarCSV()">
-        <i class="fas fa-download me-1"></i> Descargar datos
-    </button>
+        <i class="fas fa-download me-1"></i>Descargar datos
+   </button>
 
 </div>
 
