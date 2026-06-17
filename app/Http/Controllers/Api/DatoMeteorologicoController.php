@@ -49,9 +49,11 @@ class DatoMeteorologicoController extends Controller
     //Filtrar datos de los ultimos 7 dias
     public function porCiudad(Ciudad $ciudad)
     {
+	$porPagina = $request->get('per_page', 24);
+
         $datos = DatoMeteorologico::where('ciudad_id', $ciudad->id)
 		->where('fecha_hora', '>=', now()->subDays(7))
-            	->orderBy('fecha_hora', 'desc')->get();
+            	->orderBy('fecha_hora', 'desc')->paginate($porPagina);
 
         $datos = $datos->map(function ($dato) use ($ciudad) {
             return [

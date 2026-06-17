@@ -1,6 +1,10 @@
 //URL base de la API de Laravel
 const API_URL = "https://tfg-production-d219.up.railway.app/api/meteorologia";
 
+//variables
+let paginaActual = 1;
+let totalPaginas = 1;
+
 //Guardamos el ID de la ciudad seleccionada como predeterminada en este caso elijo Gandía
 let ciudadSeleccionada = 1;
 
@@ -66,7 +70,7 @@ function cargarDatosDelClima() {
         : API_URL + "/datos";
 
     //PETICIÓN 1: historial de registros
-    fetch(urlDatos)
+    fetch(urlDatos + '?page=' + paginaActual)
         .then((respuesta) => respuesta.json())
         .then((datos) => {
             if (!datos || datos.length === 0) {
@@ -117,6 +121,10 @@ function cargarDatosDelClima() {
                         <td>${registro.direccion_viento}°</td>
                     </tr>`;
             });
+		function cambiarPagina(pagina) {
+    paginaActual = pagina;
+    cargarDatosDelClima();
+}
 
 	filtrarTabla();
 
@@ -133,7 +141,7 @@ function cargarDatosDelClima() {
             document.getElementById("hum-max").textContent = estadisticas.humedad_max + " %";
             document.getElementById("hum-min").textContent = estadisticas.humedad_min + " %";
             document.getElementById("hum-media").textContent = estadisticas.humedad_media + " %";
-            document.getElementById("viento-max").textContent = estadisticas.viento_max + " km/h";
+ C           document.getElementById("viento-max").textContent = estadisticas.viento_max + " km/h";
             document.getElementById("viento-min").textContent = estadisticas.viento_min + " km/h";
             document.getElementById("viento-medio").textContent = estadisticas.viento_medio + " km/h";
             document.getElementById("total").textContent = estadisticas.total_registros;
@@ -210,4 +218,23 @@ function limpiarFiltros() {
     document.getElementById('fechaInicio').value = '';
     document.getElementById('fechaFin').value = '';
     document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
+}
+
+function cambiarPagina(pagina) {
+    paginaActual = pagina;
+    cargarDatosDelClima();
+}
+
+function pintarPaginacion() {
+    let html = '<nav><ul class="pagination pagination-sm mb-0">';
+    html += `<li class="page-item ${paginaActual === 1 ? 'disabled' : ''}">
+        <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual - 1})">«</a></li>`;
+    for (let i = 1; i <= totalPaginas; i++) {
+        html += `<li class="page-item ${i === paginaActual ? 'active' : ''}">
+            <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${i})">${i}</a></li>`;
+    }
+    html += `<li class="page-item ${paginaActual === totalPaginas ? 'disabled' : ''}">
+        <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual + 1})">»</a></li>`;
+    html += '</ul></nav>';
+    document.getElementById('paginacion').innerHTML = html;
 }
