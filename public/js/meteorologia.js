@@ -70,7 +70,13 @@ function cargarDatosDelClima() {
         : API_URL + "/datos";
 
     //PETICIÓN 1: historial de registros
-    fetch(urlDatos + '?page=' + paginaActual)
+    const fechaInicio = document.getElementById('fechaInicio') ? document.getElementById('fechaInicio').value : '';
+    const fechaFin = document.getElementById('fechaFin') ? document.getElementById('fechaFin').value : '';
+    let urlFinal = urlDatos + '?page=' + paginaActual;
+	if (fechaInicio) urlFinal += '&fecha_inicio=' + fechaInicio;
+	if (fechaFin) urlFinal += '&fecha_fin=' + fechaFin;
+
+   fetch(urlFinal)
         .then((respuesta) => respuesta.json())
         .then((respuesta) => {
 	   const datos = respuesta.data;
