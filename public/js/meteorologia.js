@@ -137,7 +137,7 @@ function cargarDatosDelClima() {
             document.getElementById("hum-max").textContent = estadisticas.humedad_max + " %";
             document.getElementById("hum-min").textContent = estadisticas.humedad_min + " %";
             document.getElementById("hum-media").textContent = estadisticas.humedad_media + " %";
- C           document.getElementById("viento-max").textContent = estadisticas.viento_max + " km/h";
+            document.getElementById("viento-max").textContent = estadisticas.viento_max + " km/h";
             document.getElementById("viento-min").textContent = estadisticas.viento_min + " km/h";
             document.getElementById("viento-medio").textContent = estadisticas.viento_medio + " km/h";
             document.getElementById("total").textContent = estadisticas.total_registros;
