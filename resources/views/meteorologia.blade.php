@@ -154,9 +154,22 @@
 
         </div>
 
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label class="form-label">Fecha inicio</label>
+        <input type="date" id="fechaInicio" class="form-control" onchange="filtrarTabla()">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Fecha fin</label>
+        <input type="date" id="fechaFin" class="form-control" onchange="filtrarTabla()">
+    </div>
+    <div class="col-md-4 d-flex align-items-end">
+        <button class="btn btn-secondary btn-sm" onclick="limpiarFiltros()">Limpiar filtros</button>
+    </div>
+</div>
 
 	<div class="d-flex justify-content-between align-items-center mb-3">
-   	 	<h6 class="text-uppercase text-secondary mb-0"><i class="fas fa-table me-2"></i>Últimos registros</h6>
+   	 	<h6 class="text-uppercase text-secondary mb-0"><i class="fas fa-table me-2"></i>Evolución últimos 7 días</h6>
 
     		<button class="btn btn-primary btn-sm mt-2" onclick="descargarCSV()"><i class="fas fa-download me-1"></i>Descargar datos</button>
 

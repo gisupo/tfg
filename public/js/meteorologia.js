@@ -168,95 +168,37 @@ setInterval(() => {
 //Función para descargar los datos de la tabla en formato CSV 
 
 function descargarCSV() {
-
-
-
-    let datos = [];
-
-
-
-    //Cabecera del archivo 
-
-    datos.push([
-
-        'ID',
-
-        'Ciudad',
-
-        'Fecha y hora',
-
-        'Temperatura (°C)',
-
-        'Humedad (%)',
-
-        'Viento (km/h)',
-
-        'Dirección (°)'
-
-    ]);
-
-
-
-    //Obtener filas de la tabla 
-
-    let filas = document.querySelectorAll('#tabla-body tr');
-
-
-
-    filas.forEach(function(fila) {
-
-
-
-        let filaDatos = [];
-
-        let celdas = fila.querySelectorAll('td');
-
-
-
-        celdas.forEach(function(celda) {
-
-            filaDatos.push(celda.textContent);
-
-        });
-
-
-
-        datos.push(filaDatos);
-
+    const filas = [['ID', 'Ciudad', 'Fecha y hora', 'Temperatura (°C)', 'Humedad (%)', 'Viento (km/h)', 'Dirección (°)']];
+    const tbody = document.getElementById('tabla-body');
+    const filasTbody = tbody.querySelectorAll('tr');
+    filasTbody.forEach(fila => {
+        const celdas = fila.querySelectorAll('td');
+        filas.push(Array.from(celdas).map(td => td.textContent));
     });
+    const csv = filas.map(f => f.join(';')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'datos_meteorologicos.csv';
+    a.click();
+}
 
+//Funcion para  filtrar por rago de fechas
 
-
-    //Crear contenido CSV 
-
-    let contenidoCSV = '';
-
-
-
-    datos.forEach(function(fila) {
-
-        contenidoCSV += fila.join(';') + '\n';
-
+function filtrarTabla() {
+    const inicio = document.getElementById('fechaInicio').value;
+    const fin = document.getElementById('fechaFin').value;
+    const filas = document.querySelectorAll('#tabla-body tr');
+    filas.forEach(fila => {
+        const fecha = new Date(fila.querySelectorAll('td')[2].textContent);
+        const dentroRango = (!inicio || fecha >= new Date(inicio)) && (!fin || fecha <= new Date(fin + 'T23:59:59'));
+        fila.style.display = dentroRango ? '' : 'none';
     });
+}
 
-
-
-    //Descargar archivo 
-
-    let archivo = new Blob([contenidoCSV], {
-
-        type: 'text/csv;charset=utf-8;'
-
-    });
-
-
-
-    let enlace = document.createElement('a');
-
-    enlace.href = URL.createObjectURL(archivo);
-
-    enlace.download = 'datos_meteorologicos.csv';
-
-    enlace.click();
-
-}    
+function limpiarFiltros() {
+    document.getElementById('fechaInicio').value = '';
+    document.getElementById('fechaFin').value = '';
+    document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
+}
