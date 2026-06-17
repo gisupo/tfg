@@ -163,3 +163,100 @@ setInterval(() => {
     cargarDatosDelClima();
     console.log("Refrescando datos...");
 }, 30000);
+
+
+//Función para descargar los datos de la tabla en formato CSV 
+
+function descargarCSV() {
+
+
+
+    let datos = [];
+
+
+
+    //Cabecera del archivo 
+
+    datos.push([
+
+        'ID',
+
+        'Ciudad',
+
+        'Fecha y hora',
+
+        'Temperatura (°C)',
+
+        'Humedad (%)',
+
+        'Viento (km/h)',
+
+        'Dirección (°)'
+
+    ]);
+
+
+
+    //Obtener filas de la tabla 
+
+    let filas = document.querySelectorAll('#tabla-body tr');
+
+
+
+    filas.forEach(function(fila) {
+
+
+
+        let filaDatos = [];
+
+        let celdas = fila.querySelectorAll('td');
+
+
+
+        celdas.forEach(function(celda) {
+
+            filaDatos.push(celda.textContent);
+
+        });
+
+
+
+        datos.push(filaDatos);
+
+    });
+
+
+
+    //Crear contenido CSV 
+
+    let contenidoCSV = '';
+
+
+
+    datos.forEach(function(fila) {
+
+        contenidoCSV += fila.join(';') + '\n';
+
+    });
+
+
+
+    //Descargar archivo 
+
+    let archivo = new Blob([contenidoCSV], {
+
+        type: 'text/csv;charset=utf-8;'
+
+    });
+
+
+
+    let enlace = document.createElement('a');
+
+    enlace.href = URL.createObjectURL(archivo);
+
+    enlace.download = 'datos_meteorologicos.csv';
+
+    enlace.click();
+
+}    
