@@ -47,7 +47,7 @@ class DatoMeteorologicoController extends Controller
     }
 
     //Filtrar datos de los ultimos 7 dias
-    public function porCiudad(Ciudad $ciudad)
+    public function porCiudad(Ciudad $ciudad, Request $request)
     {
 	$porPagina = $request->get('per_page', 24);
 
