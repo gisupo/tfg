@@ -55,7 +55,7 @@ class DatoMeteorologicoController extends Controller
 		->where('fecha_hora', '>=', now()->subDays(7))
             	->orderBy('fecha_hora', 'desc')->paginate($porPagina);
 
-        $datos = $datos->map(function ($dato) use ($ciudad) {
+        $datos->getCollection()->transform(function ($dato) use ($ciudad) {
             return [
                 'id'               => $dato->id,
                 'ciudad_id'        => $dato->ciudad_id,
