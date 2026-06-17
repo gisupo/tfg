@@ -122,7 +122,8 @@ function cargarDatosDelClima() {
                     </tr>`;
             });
 
-	filtrarTabla();
+	pintarPaginacion();
+    filtrarTabla();
 
         })
         .catch((error) => console.error("Error al cargar el historial:", error));
@@ -162,7 +163,7 @@ function ejecutarETL() {
 //Al cargar la página: cargamos ciudades y datos
 document.addEventListener("DOMContentLoaded", function () {
     cargarDatosDelClima();
-    document.getElementById("tituloCiudad").textContent = "Gandía (Valencia";
+    document.getElementById("tituloCiudad").textContent = "Gandía (Valencia)";
 });
 
 //Refresco automático cada 30 segundos
