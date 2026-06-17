@@ -184,38 +184,24 @@ function descargarCSV() {
     a.click();
 }
 
-//Funcion para  filtrar por rago de fechas
 function filtrarTabla() {
     const inicio = document.getElementById('fechaInicio').value;
     const fin = document.getElementById('fechaFin').value;
     const filas = document.querySelectorAll('#tabla-body tr');
-
     filas.forEach(fila => {
-        const texto = fila.querySelectorAll('td')[2].textContent;
-
-
-        //coger solo la parte de la fecha antes de la coma 
-
-        const fechaTexto = texto.split(',')[0]; 
-
-        const partes = fechaTexto.split('/');
-
-        const fecha = new Date(partes[2], partes[1] - 1, partes[0]); 
-
-        //año, mes, dia 
-
-        let dentroRango = true;
-
-        if (inicio) {
-            const fechaInicio = new Date(inicio);
-            dentroRango = dentroRango && fecha >= fechaInicio;
-        }
+        const texto = fila.querySelectorAll('td')[2].textContent.trim();
+        const partes = texto.split(',')[0].split('/');
+        const dia = parseInt(partes[0]);
+        const mes = parseInt(partes[1]) - 1;
+        const anyo = parseInt(partes[2]);
+        const fecha = new Date(anyo, mes, dia);
+        let mostrar = true;
+        if (inicio) mostrar = mostrar && fecha >= new Date(inicio);
         if (fin) {
             const fechaFin = new Date(fin);
-
-            dentroRango = dentroRango && fecha <= fechaFin;
+            fechaFin.setHours(23, 59, 59);
+            mostrar = mostrar && fecha <= fechaFin;
         }
-        fila.style.display = dentroRango ? '' : 'none';
+        fila.style.display = mostrar ? '' : 'none';
     });
-
 }
