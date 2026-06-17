@@ -46,11 +46,12 @@ class DatoMeteorologicoController extends Controller
         ], 200);
     }
 
-    //Devuelve los últimos 50 registros de una ciudad
+    //Filtrar datos de los ultimos 7 dias
     public function porCiudad(Ciudad $ciudad)
     {
         $datos = DatoMeteorologico::where('ciudad_id', $ciudad->id)
-            ->orderBy('fecha_hora', 'desc')->limit(50)->get();
+		->where('fecha_hora', '>=', now()->subDays(7))
+            	->orderBy('fecha_hora', 'desc')->get();
 
         $datos = $datos->map(function ($dato) use ($ciudad) {
             return [
