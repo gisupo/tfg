@@ -1,5 +1,5 @@
 //URL base de la API de Laravel
-const API_URL = "http://localhost/api/meteorologia";
+const API_URL = "https://tfg-production-d219.up.railway.app/api/meteorologia";
 
 //Guardamos el ID de la ciudad seleccionada como predeterminada en este caso elijo Gandía
 let ciudadSeleccionada = 1;
