@@ -121,10 +121,6 @@ function cargarDatosDelClima() {
                         <td>${registro.direccion_viento}°</td>
                     </tr>`;
             });
-		function cambiarPagina(pagina) {
-    paginaActual = pagina;
-    cargarDatosDelClima();
-}
 
 	filtrarTabla();
 
@@ -195,6 +191,24 @@ function descargarCSV() {
     a.click();
 }
 
+function cambiarPagina(pagina) {
+    paginaActual = pagina;
+    cargarDatosDelClima();
+}
+
+function pintarPaginacion() {
+    let html = '<nav><ul class="pagination pagination-sm mb-0">';
+    html += `<li class="page-item ${paginaActual === 1 ? 'disabled' : ''}">
+        <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual - 1})">«</a></li>`;
+    for (let i = 1; i <= totalPaginas; i++) {
+        html += `<li class="page-item ${i === paginaActual ? 'active' : ''}">
+            <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${i})">${i}</a></li>`;
+    }
+    html += `<li class="page-item ${paginaActual === totalPaginas ? 'disabled' : ''}">
+        <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual + 1})">»</a></li>`;
+    html += '</ul></nav>';
+    document.getElementById('paginacion').innerHTML = html;
+}
 
 function filtrarTabla() {
     const inicio = document.getElementById('fechaInicio').value;
@@ -220,21 +234,3 @@ function limpiarFiltros() {
     document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
 }
 
-function cambiarPagina(pagina) {
-    paginaActual = pagina;
-    cargarDatosDelClima();
-}
-
-function pintarPaginacion() {
-    let html = '<nav><ul class="pagination pagination-sm mb-0">';
-    html += `<li class="page-item ${paginaActual === 1 ? 'disabled' : ''}">
-        <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual - 1})">«</a></li>`;
-    for (let i = 1; i <= totalPaginas; i++) {
-        html += `<li class="page-item ${i === paginaActual ? 'active' : ''}">
-            <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${i})">${i}</a></li>`;
-    }
-    html += `<li class="page-item ${paginaActual === totalPaginas ? 'disabled' : ''}">
-        <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual + 1})">»</a></li>`;
-    html += '</ul></nav>';
-    document.getElementById('paginacion').innerHTML = html;
-}
