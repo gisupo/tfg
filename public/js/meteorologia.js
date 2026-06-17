@@ -192,6 +192,7 @@ function filtrarTabla() {
     const inicio = document.getElementById('fechaInicio').value;
     const fin = document.getElementById('fechaFin').value;
     const filas = document.querySelectorAll('#tabla-body tr');
+
     filas.forEach(fila => {
         const texto = fila.querySelectorAll('td')[2].textContent.trim();
         const partes = texto.split(',')[0].split('/');
@@ -204,4 +205,9 @@ function filtrarTabla() {
         if (fin) mostrar = mostrar && fechaFila <= fin;
         fila.style.display = mostrar ? '' : 'none';
     });
+}
+function limpiarFiltros() {
+    document.getElementById('fechaInicio').value = '';
+    document.getElementById('fechaFin').value = '';
+    document.querySelectorAll('#tabla-body tr').forEach(f => f.style.display = '');
 }
