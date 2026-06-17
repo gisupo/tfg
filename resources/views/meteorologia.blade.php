@@ -191,6 +191,9 @@
 
 
             </div>
+
+		<div id="paginacion" class="mt-2"></div>
+
             <p class="text-muted small text-center mt-2">
                 Se actualizan automáticamente · Total registros: <span id="total">--</span>
             </p>
