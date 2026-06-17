@@ -72,7 +72,8 @@ function cargarDatosDelClima() {
     //PETICIÓN 1: historial de registros
     fetch(urlDatos + '?page=' + paginaActual)
         .then((respuesta) => respuesta.json())
-        .then((datos) => {
+        .then((respuesta) => {
+	   const datos = respuesta.data;
             if (!datos || datos.length === 0) {
                 return;
             }
