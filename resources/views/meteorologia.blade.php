@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <h6 class="text-uppercase text-secondary mb-3"><i class="fas fa-chart-line me-2"></i>Histórico de datos</h6>
+        <h6 class="text-uppercase text-secondary mb-3"><i class="fas fa-chart-line me-2"></i>Evolución últimos 7 días</h6>
 
         <div class="row row-cols-1 row-cols-md-3 g-3 mb-4">
             <div class="col">
@@ -154,26 +154,40 @@
 
         </div>
 
+
+<!-- TÍTULO + BOTÓN DESCARGA -->
 <div class="d-flex justify-content-between align-items-center mb-3">
-   	 <h6 class="text-uppercase text-secondary mb-0"><i class="fas fa-table me-2"></i>Evolución últimos 7 días</h6>
 
-	<div class="row mb-3">
+    <h6 class="text-uppercase text-secondary mb-0">
+        <i class="fas fa-table me-2"></i>Histórico de datos
+    </h6>
 
-    	<div class="col-md-4">
-        	<input type="date" id="fechaInicio" class="form-control" onchange="filtrarTabla()">
+    <button class="btn btn-primary btn-sm" onclick="descargarCSV()">
+        <i class="fas fa-download me-1"></i> Descargar datos
+    </button>
+
 </div>
-	 <div class="col-md-4">
-        	<input type="date" id="fechaFin" class="form-control" onchange="filtrarTabla()">
-    	</div>
+
+<!--Filtros -->
+<div class="row mb-3">
+
+    <div class="col-md-4">
+        <label class="form-label">Fecha inicio</label>
+        <input type="date" id="fechaInicio" class="form-control" onchange="filtrarTabla()">
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Fecha fin</label>
+        <input type="date" id="fechaFin" class="form-control" onchange="filtrarTabla()">
+    </div>
 
     <div class="col-md-4 d-flex align-items-end">
-        <button class="btn btn-outline-secondary btn-sm w-100" onclick="limpiarFiltros()">Limpiar filtro</button>
+        <button class="btn btn-outline-secondary btn-sm w-100" onclick="limpiarFiltros()">Limpiar filtro </button>
     </div>
+
 </div>
 
-    	<button class="btn btn-primary btn-sm mt-2" onclick="descargarCSV()"><i class="fas fa-download me-1"></i>Descargar datos</button>
-
-	</div>
+<!--Tabla-->
         <div class="card p-3 mb-4">
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -194,7 +208,7 @@
 
             </div>
             <p class="text-muted small text-center mt-2">
-                Se actualizan automáticamente cada 30 segundos · Total registros: <span id="total">--</span>
+                Se actualizan automáticamente · Total registros: <span id="total">--</span>
             </p>
         </div>
 
