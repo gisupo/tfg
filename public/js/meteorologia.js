@@ -200,6 +200,7 @@ function descargarCSV() {
 
 function filtrarTabla() {
     paginaActual = 1;
+    actualizarTitulos();
     cargarDatosDelClima();
 }
 
@@ -207,6 +208,7 @@ function limpiarFiltros() {
     document.getElementById('fechaInicio').value = '';
     document.getElementById('fechaFin').value = '';
     paginaActual = 1;
+    actualizarTitulos();
     cargarDatosDelClima()
 }
 
@@ -227,4 +229,18 @@ function pintarPaginacion() {
         <a class="page-link" style="cursor:pointer" onclick="cambiarPagina(${paginaActual + 1})">»</a></li>`;
     html += '</ul></nav>';
     document.getElementById('paginacion').innerHTML = html;
+}
+
+function actualizarTitulos() {
+    const inicio = document.getElementById('fechaInicio').value;
+    const fin = document.getElementById('fechaFin').value;
+    const tituloGraficas = document.getElementById('tituloGraficas');
+    const tituloEstadisticas = document.getElementById('tituloEstadisticas');
+    if (inicio || fin) {
+        tituloGraficas.innerHTML = '<i class="fas fa-chart-line me-2"></i>Evolución del período seleccionado';
+        tituloEstadisticas.innerHTML = '<i class="fas fa-chart-bar me-2"></i>Estadísticas del período seleccionado';
+    } else {
+        tituloGraficas.innerHTML = '<i class="fas fa-chart-line me-2"></i>Evolución últimos 7 días';
+        tituloEstadisticas.innerHTML = '<i class="fas fa-chart-bar me-2"></i>Estadísticas históricas';
+    }
 }
