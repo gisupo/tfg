@@ -158,7 +158,7 @@
 	<div class="d-flex justify-content-between align-items-center mb-3">
    	 	<h6 class="text-uppercase text-secondary mb-0"><i class="fas fa-table me-2"></i>Últimos registros</h6>
 
-    		<button class="btn btn-primary btn-sm mt-2" onclick="descargarCSV()"><i class="fas fa-download me-1"></i> Exportar CSV</button>
+    		<button class="btn btn-primary btn-sm mt-2" onclick="descargarCSV()"><i class="fas fa-download me-1"></i>Descargar datos</button>
 
 	</div>
         <div class="card p-3 mb-4">
