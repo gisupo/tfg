@@ -154,9 +154,6 @@
 
         </div>
 
-	<button class="btn btn-success btn-sm" onclick="descargarCSV()">
-   		 <i class="fas fa-download me-1"></i> Descargar datos
-	</button>
 
         <h6 class="text-uppercase text-secondary mb-3"><i class="fas fa-table me-2"></i>Últimos registros</h6>
         <div class="card p-3 mb-4">
@@ -175,6 +172,11 @@
                     </thead>
                     <tbody id="tabla-body"></tbody>
                 </table>
+
+	<button class="btn btn-primary btn-sm mt-2" onclick="descargarCSV()">
+    		<i class="fas fa-download me-1"></i> Descargar datos
+	</button>
+
             </div>
             <p class="text-muted small text-center mt-2">
                 Se actualizan automáticamente cada 30 segundos · Total registros: <span id="total">--</span>
