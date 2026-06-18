@@ -8,4 +8,4 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 RUN chmod -R 775 storage bootstrap/cache
 EXPOSE 8080
-CMD php artisan config:clear && php artisan migrate --force && php -S 0.0.0.0:8080 -t public
+CMD php artisan config:clear && php artisan migrate --force && php artisan db:seed --class=CiudadesSeeder --force && php -S 0.0.0.0:8080 -t public
