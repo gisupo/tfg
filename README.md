@@ -1,37 +1,46 @@
-# Sistema Meteorológico - Gandia
+# Sistema Meteorológico
 
 Proyecto Final de Grado Superior de Desarrollo de Aplicaciones Web (DAW)
 I.E.S. Maria Enríquez - Gandia - Curso 2025/2026
 
 ## Descripción
 
-Aplicación web orientada a la obtención de datos desde fuentes externas, su procesamiento y almacenamiento en una base de datos. El sistema obtiene datos meteorológicos en tiempo real de varias ciudades españolas mediante la API Open-Meteo, los procesa y almacena en una base de datos MySQL, permitiendo gestionar y consultar la información recopilada mediante una interfaz web con gráficas interactivas.
+Aplicación web que obtiene datos meteorológicos en tiempo real de 14 ciudades españolas mediante la API Open-Meteo, los procesa y almacena en una base de datos MySQL, y los visualiza mediante una interfaz web con gráficas interactivas.
+
+## 🌐 Demo en producción
+
+https://tfg-production-d219.up.railway.app/meteorologia
 
 ## Tecnologías utilizadas
 
-- **Backend:** PHP 8 + Laravel 11
-- **Base de datos:** MySQL 8 (Docker)
+- **Backend:** PHP 8.2 + Laravel 12
+- **Base de datos:** MySQL 9
 - **Frontend:** HTML, CSS, Bootstrap 5, Chart.js, Font Awesome
-- **Entorno:** Laravel Sail + Docker
+- **Entorno local:** Laravel Sail + Docker
+- **Despliegue:** Railway (PaaS)
 - **API externa:** Open-Meteo
 
 ## Funcionalidades
 
 - ETL automática cada hora mediante el scheduler de Laravel
 - API REST con endpoints para consultar datos y estadísticas
-- Visualización de datos con gráficas de temperatura, humedad y viento
-- Tabla con historial de registros
+- Visualización de datos con gráficas de los últimos 7 días
+- Filtro por rango de fechas
+- Paginación de registros
+- Descarga de datos en CSV
 - Estadísticas históricas (máximos, mínimos y medias)
 - Botón para actualizar datos manualmente
+- Principales ciudades de España
 
-## Instalación
+## Instalación local
 
 1. Clonar el repositorio
 2. Copiar `.env.example` a `.env` y configurar las variables
 3. Ejecutar `./vendor/bin/sail up -d`
-4. Ejecutar `./vendor/bin/sail artisan migrate --seed`
-5. Ejecutar `./vendor/bin/sail artisan etl:ejecutar`
-6. Abrir `http://localhost/meteorologia`
+4. Ejecutar `./vendor/bin/sail artisan migrate`
+5. Ejecutar `./vendor/bin/sail artisan db:seed`
+6. Ejecutar `./vendor/bin/sail artisan etl:ejecutar`
+7. Abrir `http://localhost/meteorologia`
 
 ## Autor
 
