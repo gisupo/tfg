@@ -1,11 +1,11 @@
-# Sistema Meteorológico
+# Sistema Integral para la ingesta, transformación y representación de datos meteorológicos
 
 Proyecto Final de Grado Superior de Desarrollo de Aplicaciones Web (DAW)
 I.E.S. Maria Enríquez - Gandia - Curso 2025/2026
 
 ## Descripción
 
-Aplicación web que obtiene datos meteorológicos en tiempo real de 14 ciudades españolas mediante la API Open-Meteo, los procesa y almacena en una base de datos MySQL, y los visualiza mediante una interfaz web con gráficas interactivas.
+Aplicación web que obtiene datos meteorológicos en tiempo real de ciudades españolas mediante la API Open-Meteo, los procesa y almacena en una base de datos MySQL, y los visualiza mediante una interfaz web con gráficas interactivas.
 
 ## 🌐 Demo en producción
 
