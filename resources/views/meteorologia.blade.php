@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <h6 class="text-uppercase text-secondary mb-3" id="tituloEstadisticas"><i class="fas fa-chart-line me-2"></i>Evolución últimos 7 días</h6>
+        <h6 class="text-uppercase text-secondary mb-3" id="tituloEstadisticas"><i class="fas fa-chart-line me-2"></i>Evolución últimos días</h6>
 
         <div class="row row-cols-1 row-cols-md-3 g-3 mb-4">
             <div class="col">
